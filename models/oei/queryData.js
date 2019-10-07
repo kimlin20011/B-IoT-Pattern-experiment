@@ -10,12 +10,16 @@ const unlockAccount = require('../unlock');
 module.exports = async function queryData(data) {
     let Consumer_Abi = config.Consumer.abi;
     //取得目前geth中第一個account
-    let nowAccount =config.geth.account;
     let password = config.geth.password;
-    let Consumer_Address = fs.readFileSync('./Consumer_address.txt').toString();
+    let Consumer_Address = fs.readFileSync('./Consumer_Address.txt').toString();
+    console.log(`Consumer_Address:${Consumer_Address}`)
     let Consumer = new web3.eth.Contract(Consumer_Abi,Consumer_Address);
 
+    //取得目前geth中第一個account
+    let nowAccount = "";
+    await web3.eth.getAccounts((err, res) => { nowAccount = res[0] });
     // 解鎖
+
     let unlock = await unlockAccount(nowAccount,password);
     if (!unlock) {
         console.log(`not unlock`);
@@ -23,8 +27,8 @@ module.exports = async function queryData(data) {
     }
 
     return new Promise((resolve, reject) => {
+        console.log(data);
         let result ={};
-        //console.log(data);
         Consumer.methods
             .queryData(data.deviceID)
             .send({
@@ -35,7 +39,8 @@ module.exports = async function queryData(data) {
                 result.identifier = receipt.events._query.returnValues.identifier;
                 result.status = true;
                 let result_event = JSON.stringify(result);
-                fs.writeFileSync('./query.json', result_event);
+                fs.writeFileSync('./queryIdentifier.json', result_event);
+                console.log(`identifier:${result.identifier}`);
                 resolve(result);
             })
             .on("error", function(error) {

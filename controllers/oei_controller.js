@@ -26,4 +26,15 @@ module.exports = {
             ctx.body = error;
         }
     },
+    async queryData(ctx) {
+        let formData = ctx.request.body;
+        let res = {};
+        try {
+            let queryData_result = await queryData(formData);
+            res = queryData_result;
+            ctx.body = res;
+        } catch (error) {
+            ctx.body = error;
+        }
+    },
 }

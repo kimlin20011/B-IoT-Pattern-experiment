@@ -51,6 +51,7 @@ module.exports = async function deploy_Consumer_contract() {
                 result.address = Consumer_Address;
                 //將新生成的RM地址寫進.txt檔案
                 fs.writeFileSync('./Consumer_Address.txt', result.address);
+                fs.writeFileSync('../Device_B-IoT-Pattern-experiment/Consumer_Address.txt', result.address);
                 resolve(result);
             })
     });

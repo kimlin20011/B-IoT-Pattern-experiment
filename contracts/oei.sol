@@ -1,3 +1,5 @@
+//solcjs -o ../migrates --bin --abi oei.sol
+
 pragma solidity ^0.5.2;
 contract QueryRegistry {
     event QueryEvent(uint indexed deviceID,uint timestamp,address callbackAddress, bytes32 identifier);
@@ -13,9 +15,9 @@ contract Consumer{
     address public queryRegistryAddress;
     
     event UploadEvent(string data,uint callbackTimestamp, bytes32 identifier);
-    //event _query(bytes32 identifier);
+    event _query(bytes32 identifier);
     mapping(bytes32 => bool)validateQueries;
-
+    
     constructor(address _queryRegistryAddress) public{
         queryRegistryAddress = _queryRegistryAddress;
     }
@@ -24,8 +26,8 @@ contract Consumer{
     function queryData(uint _deviceID) public {
         QueryRegistry queryRegistry = QueryRegistry(queryRegistryAddress);
         bytes32 queryIdentifer = queryRegistry.query(_deviceID,address(this));
-        validateQueries[queryIdentifer] = true; //To avoid repeatedly invoke
-        //emit _query(queryIdentifer);
+        validateQueries[queryIdentifer]=true; //To avoid repeatedly invoke
+        emit _query(queryIdentifer);
     }
     
     //the device has to callback from this function
