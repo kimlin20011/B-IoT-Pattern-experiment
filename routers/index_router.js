@@ -4,10 +4,9 @@
 
 const router = require('koa-router')();
 
-const blockchain = require('./blockchain_router');
+const oei = require('./oei_router');
 
-
-router.use('/blockchain', blockchain.routes(), blockchain.allowedMethods());
+router.use('/oei', oei.routes(), oei.allowedMethods());
 
 
 

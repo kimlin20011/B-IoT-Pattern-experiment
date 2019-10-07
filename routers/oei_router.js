@@ -1,8 +1,8 @@
 const router = require('koa-router')();
-const blockchain = require('../controllers/blockchain_controller');
+const oei = require('../controllers/oei_controller');
 
 module.exports = router
-    .post('/deploy_RM', blockchain.deploy_RM_contract)
-    .post('/deploy_Auth', blockchain.deploy_Auth_contract)
-    .get('/accounts', blockchain.getAccounts)
+    .post('/deployQueryRegistry', oei.deployQueryRegistery)
+    .post('/deployConsumer', oei.deployConsumer)
+
 

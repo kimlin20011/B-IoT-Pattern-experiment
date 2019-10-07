@@ -3,31 +3,26 @@ const fs = require('fs');
 require('dotenv').config();
 
 //讀進合約abi,bytecode
-const RM_Abi = JSON.parse(fs.readFileSync('./migrate/uma_sol_Resource_management_contract.abi').toString());
-const RM_Bytecode = '0x' + fs.readFileSync('./migrate/uma_sol_Resource_management_contract.bin').toString();
-const Auth_Abi = JSON.parse(fs.readFileSync('./migrate/uma_sol_Authorization_contract.abi').toString());
-const Auth_Bytecode = '0x' + fs.readFileSync('./migrate/uma_sol_Authorization_contract.bin').toString();
+const Consumer_Abi = JSON.parse(fs.readFileSync('./migrates/oei_sol_Consumer.abi').toString());
+const Consumer_Bytecode = '0x' + fs.readFileSync('./migrates/oei_sol_Consumer.bin').toString();
+const QueryRegistry_Abi = JSON.parse(fs.readFileSync('./migrates/oei_sol_QueryRegistry.abi').toString());
+const QueryRegistry_Bytecode = '0x' + fs.readFileSync('./migrates/oei_sol_QueryRegistry.bin').toString();
 
 module.exports ={
     port: 3001,
-    auth:{
-        auth_dur:13
+    Consumer: {
+        abi: Consumer_Abi,
+        bytecode: Consumer_Bytecode,
     },
-    RM: {
-        abi: RM_Abi,
-        bytecode: RM_Bytecode,
-    },
-    Auth: {
-        abi: Auth_Abi,
-        bytecode: Auth_Bytecode,
+    QueryRegistry: {
+        abi: QueryRegistry_Abi,
+        bytecode: QueryRegistry_Bytecode,
     },
     geth: {
         account: `0xe8902cf406d7547fc3f69a2f463eb1463aa6b978`,
-        //account: `0xdfbc7a1f5f867a9fd73d9fbe9da2b5b34ea67d95`,
-        rqp_account: `0xe8902cf406d7547fc3f69a2f463eb1463aa6b978`,
         //暫時不用
         password: process.env.password,
-        gethWebsocketUrl:`ws://localhost:8546`,
+        gethWebsocketUrl:`ws://localhost:8545`,
         //keystoreDir:`C:\\Users\\nccu\\implement\\chain_new\\data\\keystore`
         keystoreDir:`/Users/nccu/Documents/implement/chain_new/data/keystore`
     },

@@ -1,5 +1,5 @@
 "use strict";
-const config = require('../config/config');
+const config = require('../configs/config');
 let gethWebsocketUrl = config.geth.gethWebsocketUrl;
 const Web3 = require('web3');
 // use the given Provider, e.g in Mist, or instantiate a new websocket provider
