@@ -12,7 +12,6 @@ module.exports = async function queryData(data) {
     //取得目前geth中第一個account
     let password = config.geth.password;
     let Consumer_Address = fs.readFileSync('./Consumer_Address.txt').toString();
-    console.log(`Consumer_Address:${Consumer_Address}`)
     let Consumer = new web3.eth.Contract(Consumer_Abi,Consumer_Address);
 
     //取得目前geth中第一個account
@@ -27,7 +26,6 @@ module.exports = async function queryData(data) {
     }
 
     return new Promise((resolve, reject) => {
-        console.log(data);
         let result ={};
         Consumer.methods
             .queryData(data.deviceID)

@@ -5,5 +5,6 @@ module.exports = router
     .post('/deployQueryRegistry', oei.deployQueryRegistery)
     .post('/deployConsumer', oei.deployConsumer)
     .post('/queryData', oei.queryData)
+    .get('/listenCallbackEvent', oei.listenCallbackEvent)
 
 
