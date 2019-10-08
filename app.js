@@ -1,6 +1,7 @@
 const path = require('path');
 const Koa = require('koa');
 //const views = require('koa-views');
+const responseTime = require('koa-response-time');
 const bodyParser = require('koa-bodyparser');
 const koaLogger = require('koa-logger');
 const static = require('koa-static');
@@ -17,6 +18,13 @@ app.use(koaLogger());
 
 // 配置ctx.body解析中间件
 app.use(bodyParser());
+
+// 配置ctx.body解析中间件
+app.use(bodyParser());
+
+
+// 測試request response的時間
+app.use(responseTime({ hrtime: false }));
 
 
 // 配置服务端模板渲染引擎中间件

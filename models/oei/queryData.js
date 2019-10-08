@@ -28,7 +28,7 @@ module.exports = async function queryData(data) {
     return new Promise((resolve, reject) => {
         let result ={};
         Consumer.methods
-            .queryData(data.deviceID)
+            .queryData(`123`)
             .send({
                 from: nowAccount,
                 gas: 3000000
@@ -37,7 +37,7 @@ module.exports = async function queryData(data) {
                 result.identifier = receipt.events._query.returnValues.identifier;
                 result.status = true;
                 let result_event = JSON.stringify(result);
-                fs.writeFileSync('./queryIdentifier.json', result_event);
+                //fs.writeFileSync('./queryIdentifier.json', result_event);
                 console.log(`identifier:${result.identifier}`);
                 resolve(result);
             })
