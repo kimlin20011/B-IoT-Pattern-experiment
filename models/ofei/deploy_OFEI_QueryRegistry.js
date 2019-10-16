@@ -7,15 +7,15 @@ const Web3 = require('web3');
 const web3 = new Web3(Web3.givenProvider || gethWebsocketUrl);
 const unlockAccount = require('../unlock');
 
-module.exports = async function deploy_QueryRegistry_contract() {
-    let QueryRegistry_Bytecode = config.QueryRegistry.bytecode;
-    let QueryRegistry_Abi = config.QueryRegistry.abi;
+module.exports = async function deploy_OFEI_QueryRegistry_contract() {
+    let OFEI_QueryRegistry_Bytecode = config.OFEI_QueryRegistry.bytecode;
+    let OFEI_QueryRegistry_Abi = config.OFEI_QueryRegistry.abi;
     //取得目前geth中第一個account
     let nowAccount = "";
     await web3.eth.getAccounts((err, res) => { nowAccount = res[0] });
 
     let password = config.geth.password;
-    let QR = new web3.eth.Contract(QueryRegistry_Abi);
+    let QR = new web3.eth.Contract(OFEI_QueryRegistry_Abi);
 
     // 解鎖
     let unlock = await unlockAccount(nowAccount, password);
@@ -28,7 +28,7 @@ module.exports = async function deploy_QueryRegistry_contract() {
         let result = {};
         QR
             .deploy({
-                data: QueryRegistry_Bytecode
+                data: OFEI_QueryRegistry_Bytecode
             })
             .send({
                 from: nowAccount,
@@ -40,14 +40,12 @@ module.exports = async function deploy_QueryRegistry_contract() {
                 reject(result);
             })
             .on("receipt", function (receipt) {
-                console.log(receipt);
+                //console.log(`QR address:${receipt.contractAddress}`);
                 // 更新合約介面
-                let QueryRegistry_Address = receipt.contractAddress;
-                result.status = true;
-                result.address = QueryRegistry_Address;
+                result.address = receipt.contractAddress;
                 //將新生成的RM地址寫進.txt檔案
-                fs.writeFileSync('./QueryRegistry_Address.txt', result.address);
-                fs.writeFileSync('../Device_B-IoT-Pattern-experiment/QueryRegistry_Address.txt', result.address);
+                fs.writeFileSync('./OFEI_QueryRegistry_Address.txt', result.address);
+                fs.writeFileSync('../Device_B-IoT-Pattern-experiment/OFEI_QueryRegistry_Address.txt', result.address);
                 resolve(result);
             })
     });
