@@ -6,5 +6,7 @@ module.exports = router
     .post('/deployConsumer', oei.deployConsumer)
     .post('/queryData', oei.queryData)
     .get('/listenCallbackEvent', oei.listenCallbackEvent)
+    .post('/queryData_PID', oei.queryData_PIDusage)
+    .get('/listenCallbackEvent_PID', oei.listenCallbackEvent_PIDusage)
 
 

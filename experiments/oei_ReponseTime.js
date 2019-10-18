@@ -1,8 +1,7 @@
 const request = require('request');
-const moment = require('moment');
 const fs = require('fs');
 
-
+//監聽device的智能合約事件
 request.get({
     url: "http://localhost:3002/oei/listenQueryEvent",
 }, function (err, httpResponse, body) {
@@ -13,6 +12,7 @@ request.get({
     }
 });
 
+//監聽edge的智能合約事件
 request.get({
     url: "http://localhost:3001/oei/listenCallbackEvent",
 }, function (err, httpResponse, body) {
@@ -23,6 +23,7 @@ request.get({
     }
 });
 
+//function 發出api request並輸出csv
 function makeRequest(index) {
     //let startDate = moment();
     let startDate = Date.now();
@@ -40,8 +41,6 @@ function makeRequest(index) {
             //let endDate = moment();
             let endDate = Date.now();
             let str = `${index},${body.identifier},${startDate},${endDate},${endDate-startDate}\n`
-
-            //let str = `${index},${body.identifier},${startDate},${endDate},${endDate.diff(startDate)}\n`
             try {
                 fs.appendFile(`../logs/requestData.csv`, str, function (err) {
                     if (err) throw err;
