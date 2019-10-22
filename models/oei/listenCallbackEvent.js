@@ -8,12 +8,12 @@ const moment = require('moment');
 const web3 = new Web3(Web3.givenProvider || gethWebsocketUrl);
 
 module.exports = async function listenCallbackEvent() {
-    let Consumer_Abi = config.Consumer.abi;
+    let QueryRegistry_Abi = config.QueryRegistry.abi;
     //取得目前geth中第一個account
-    let Consumer_Address = fs.readFileSync('./Consumer_Address.txt').toString();
-    let Consumer = new web3.eth.Contract(Consumer_Abi, Consumer_Address);
+    let QueryRegistry_Address = fs.readFileSync('./QueryRegistry_Address.txt').toString();
+    let QueryRegistry = new web3.eth.Contract(QueryRegistry_Abi, QueryRegistry_Address);
 
-    Consumer.events.UploadEvent({})
+    QueryRegistry.events.UploadEvent({})
         .on('data', function (event) {
             let result = {};
             result.data = event.returnValues.data;

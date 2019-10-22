@@ -1,5 +1,6 @@
 const deployQueryRegistery = require('../models/oei/deployQueryRegistry');
 const deployConsumer = require('../models/oei/deployConsumer');
+const addVaildDevice = require('../models/oei/addVaildDevice');
 const queryData = require('../models/oei/queryData');
 const listenCallbackEvent = require('../models/oei/listenCallbackEvent')
 const queryData_PIDusage = require('../models/oei/queryData_PIDusage');
@@ -25,6 +26,17 @@ module.exports = {
         try {
             let deployConsumer_result = await deployConsumer(formData);
             res = deployConsumer_result;
+            ctx.body = res;
+        } catch (error) {
+            ctx.body = error;
+        }
+    },
+    async addVaildDevice(ctx) {
+        let formData = ctx.request.body;
+        let res = {};
+        try {
+            let addVaildDevice_result = await addVaildDevice(formData);
+            res = addVaildDevice_result;
             ctx.body = res;
         } catch (error) {
             ctx.body = error;

@@ -5,7 +5,7 @@ const pidusage = require('pidusage')
 let logging = false;
 let interval;
 let koa_pid= process.pid;
-let geth_pid= 3046;
+let geth_pid= 11578;
 
 
 
