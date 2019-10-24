@@ -5,7 +5,8 @@ const pidusage = require('pidusage')
 let logging = false;
 let interval;
 let koa_pid= process.pid;
-let geth_pid= 11578;
+let geth_pid= 1646;
+let index = 0;
 
 
 
@@ -15,7 +16,6 @@ module.exports = async function getPIDusage(data) {
         logging = true;
         console.log(`Start logging pidusage!!`);
         interval = setInterval(function () {
-            let index = 0
             pidusage([koa_pid, geth_pid], function (err, stats) {
 
                 // => {

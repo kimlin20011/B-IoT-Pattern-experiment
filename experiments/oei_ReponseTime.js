@@ -38,17 +38,16 @@ function makeRequest(index) {
         if (err) {
             console.error(err);
         } else {
-            //let endDate = moment();
             let endDate = Date.now();
             let str = `${index},${body.identifier},${startDate},${endDate},${endDate-startDate}\n`
             try {
-                fs.appendFile(`../logs/requestData.csv`, str, function (err) {
+                fs.appendFile(`../logs/response_time.csv`, str, function (err) {
                     if (err) throw err;
                     console.log('Log Saved!');
                 });
             } catch (e) {
                 console.log(e);
-                fs.writeFileSync(`../logs/requestData.csv`, str, (err) => { console.log(err); });
+                fs.writeFileSync(`../logs/response_time.csv`, str, (err) => { console.log(err); });
             }
         }
     });
