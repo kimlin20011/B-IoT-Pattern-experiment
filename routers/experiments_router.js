@@ -5,5 +5,6 @@ module.exports = router
     .get('/getPID', exp.pid)
     .get('/getPIDusage', exp.getPIDusage)
     .post('/testResponseTime', exp.testResponseTime)
+    .post('/testOFEIResponseTime', exp.testOFEIResponseTime)
 
 

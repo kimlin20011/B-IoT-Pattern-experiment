@@ -13,6 +13,8 @@ module.exports = async function deploy_Consumer_contract() {
     let QueryRegistry_Address = fs.readFileSync('./QueryRegistry_Address.txt').toString();
     let Consumer = new web3.eth.Contract(Consumer_Abi);
 
+    console.log(`QueryRegistry_Address${QueryRegistry_Address}`)
+
     //取得目前geth中第一個account
     let nowAccount = "";
     await web3.eth.getAccounts((err, res) => { nowAccount = res[0] });
@@ -51,7 +53,6 @@ module.exports = async function deploy_Consumer_contract() {
                 result.address = Consumer_Address;
                 //將新生成的RM地址寫進.txt檔案
                 fs.writeFileSync('./Consumer_Address.txt', result.address);
-                fs.writeFileSync('../Device_B-IoT-Pattern-experiment/Consumer_Address.txt', result.address);
                 resolve(result);
             })
     });

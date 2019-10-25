@@ -5,12 +5,26 @@ const Web3 = require('web3');
 const web3 = new Web3(Web3.givenProvider || gethWebsocketUrl);
 const fs = require("fs");
 
-
 module.exports =  function subscribe_whisper() {
+
     web3.shh.newKeyPair()
         .then((keyPairID) => {
             web3.shh.subscribe("messages", {privateKeyID: keyPairID}, (err, msg) => {
-                console.log(web3.utils.hexToUtf8(msg.payload));
+            
+                let csvname = fs.readFileSync('./ofei_csvName.txt').toString();
+                let msg_receive = web3.utils.hexToUtf8(msg.payload);
+                console.log(`whisper訊息${msg_receive}`);
+                let callbackDate = Date.now();
+                let str = `${msg_receive},${callbackDate}\n`
+                try {
+                    fs.appendFile(`./logs/${csvname}_whisper_callbackData.csv`, str, function (err) {
+                        if (err) throw err;
+                        console.log(`${csvname}_callbackData_Log Saved!`);
+                    });
+                } catch (e) {
+                    console.log(e);
+                    fs.writeFileSync(`./logs/${csvname}_callbackData.csv`, str, (err) => { console.log(err); });
+                }
             });
 
             web3.shh.getPublicKey(keyPairID).then((publicKey) => {
