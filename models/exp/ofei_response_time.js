@@ -20,7 +20,7 @@ module.exports = async function expResponseTime(data) {
     //function 發出api request並輸出csv
     for (let i = 0; i < data.resquestTimes; i++) {
         let startDate = Date.now();
-        let str = `${i},${startDate}\n`
+        let str = `i${i},${startDate}\n`
         try {
             fs.appendFile(`./logs/${data.csvName}.csv`, str, function (err) {
                 if (err) throw err;
@@ -31,7 +31,7 @@ module.exports = async function expResponseTime(data) {
             fs.writeFileSync(`./logs/${data.csvName}.csv`, str, (err) => { console.log(err); });
         }
 
-        info.index =  i ;
+        info.index =  `i${i}`;
 
         
         request.post({
