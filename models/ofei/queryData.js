@@ -12,7 +12,7 @@ let nowAccount = config.geth.account;
 module.exports = async function queryData(data) {
     let OFEI_QueryRegistry_Abi = config.OFEI_QueryRegistry.abi;
     //取得目前geth中第一個account
-    let password = config.geth.password;
+    //let password = config.geth.password;
     //let OFEI_QueryRegistry_Address = fs.readFileSync('./OFEI_QueryRegistry_Address.txt').toString();
     let OFEI_QueryRegistry = new web3.eth.Contract(OFEI_QueryRegistry_Abi, OFEI_QueryRegistry_Address);
 

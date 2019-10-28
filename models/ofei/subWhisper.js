@@ -7,11 +7,13 @@ const fs = require("fs");
 
 module.exports =  function subscribe_whisper() {
 
+    let csvname = fs.readFileSync('./ofei_csvName.txt').toString();
+
     web3.shh.newKeyPair()
         .then((keyPairID) => {
             web3.shh.subscribe("messages", {privateKeyID: keyPairID}, (err, msg) => {
             
-                let csvname = fs.readFileSync('./ofei_csvName.txt').toString();
+    
                 let msg_receive = web3.utils.hexToUtf8(msg.payload);
                 console.log(`whisper訊息${msg_receive}`);
                 let callbackDate = Date.now();

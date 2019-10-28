@@ -30,6 +30,7 @@ module.exports = async function expResponseTime(data) {
             } else {
                 let endDate = Date.now();
                 let str = `${i},${body.identifier},${startDate},${endDate},${endDate - startDate}\n`
+                //let str = `${i},${body.identifier},${startDate}}\n`
                 try {
                     fs.appendFile(`./logs/${data.csvName}.csv`, str, function (err) {
                         if (err) throw err;
