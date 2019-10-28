@@ -5,10 +5,10 @@ const Web3 = require('web3');
 const web3 = new Web3(Web3.givenProvider || gethWebsocketUrl);
 const fs = require("fs");
 
-module.exports =  function subscribe_whisper() {
+module.exports =  function subscribe_whisper(data) {
 
-    let csvname = fs.readFileSync('./ofei_csvName.txt').toString();
-
+    //let csvname = fs.readFileSync('./ofei_csvName.txt').toString();
+    let csvname = data.csvname;
     web3.shh.newKeyPair()
         .then((keyPairID) => {
             web3.shh.subscribe("messages", {privateKeyID: keyPairID}, (err, msg) => {

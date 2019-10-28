@@ -26,10 +26,10 @@ module.exports = {
         }
     },
     async whisperSubscribe(ctx) {
-        //let formData = ctx.request.body;
+        let formData = ctx.request.body;
         let res = {};
         try {
-            let whisperSubscribe_result = await subWhisper();
+            let whisperSubscribe_result = await subWhisper(formData);
             res = whisperSubscribe_result;
             ctx.body = res;
         } catch (error) {

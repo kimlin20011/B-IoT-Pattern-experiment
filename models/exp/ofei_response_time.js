@@ -11,15 +11,16 @@ const fs = require('fs');
 module.exports = async function expResponseTime(data) {
 
     fs.writeFileSync('./ofei_csvName.txt', data.csvName);
+    let whisperPK = fs.readFileSync('./Edge_publicKey.txt').toString();
+    let info = {};
+    info.queryTopic =data.queryTopic;
+    info.deviceID =data.deviceID;
+    info.whisperPK =whisperPK;
 
     //function 發出api request並輸出csv
     for (let i = 0; i < data.resquestTimes; i++) {
         let startDate = Date.now();
-        let info = {};
-        info.queryTopic =data.queryTopic;
-        info.deviceID =data.deviceID;
         
-
         request.post({
             url: `http://localhost:3001/ofei/queryData`,
             body: info,
