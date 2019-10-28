@@ -31,15 +31,13 @@ module.exports = async function queryData(data) {
         let result = {};
         //let whisperPK = fs.readFileSync('./Edge_publicKey.txt').toString();
         OFEI_QueryRegistry.methods
-            .offchainQueryRegistry(data.deviceID, data.queryTopic, data.whisperPK)
+            .offchainQueryRegistry(data.deviceID, data.index, data.whisperPK)
             .send({
                 from: nowAccount,
                 gas: 3000000
             })
             .on("receipt", function (receipt) {
                 result = receipt.events.offchainQueryInfo.returnValues;
-                //let result_event = JSON.stringify(result);
-                //fs.writeFileSync('./OFEI_query.json', result_event);
                 resolve(result);
             })
             .on("error", function (error) {

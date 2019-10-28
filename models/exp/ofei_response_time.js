@@ -20,6 +20,19 @@ module.exports = async function expResponseTime(data) {
     //function 發出api request並輸出csv
     for (let i = 0; i < data.resquestTimes; i++) {
         let startDate = Date.now();
+        let str = `${i},${startDate}\n`
+        try {
+            fs.appendFile(`./logs/${data.csvName}.csv`, str, function (err) {
+                if (err) throw err;
+                console.log(`index${i},${data.csvName}Log Saved!`);
+            });
+        } catch (e) {
+            console.log(e);
+            fs.writeFileSync(`./logs/${data.csvName}.csv`, str, (err) => { console.log(err); });
+        }
+
+        info.index =  i ;
+
         
         request.post({
             url: `http://localhost:3001/ofei/queryData`,
@@ -29,18 +42,19 @@ module.exports = async function expResponseTime(data) {
             if (err) {
                 console.error(err);
             } else {
-                let endDate = Date.now();
-                let str = `${i},${body.identifier},${startDate},${endDate},${endDate - startDate}\n`
+                //let endDate = Date.now();
+                //let str = `${i},${body.identifier},${startDate},${endDate},${endDate - startDate}\n`
                 //let str = `${i},${body.identifier},${startDate}}\n`
-                try {
-                    fs.appendFile(`./logs/${data.csvName}.csv`, str, function (err) {
-                        if (err) throw err;
-                        console.log(`index${i},${data.csvName}Log Saved!`);
-                    });
-                } catch (e) {
-                    console.log(e);
-                    fs.writeFileSync(`./logs/${data.csvName}.csv`, str, (err) => { console.log(err); });
-                }
+                // try {
+                //     fs.appendFile(`./logs/${data.csvName}.csv`, str, function (err) {
+                //         if (err) throw err;
+                //         console.log(`index${i},${data.csvName}Log Saved!`);
+                //     });
+                // } catch (e) {
+                //     console.log(e);
+                //     fs.writeFileSync(`./logs/${data.csvName}.csv`, str, (err) => { console.log(err); });
+                // }
+                console.log(body);
             }
         });
     }
