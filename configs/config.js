@@ -25,7 +25,7 @@ module.exports ={
         bytecode: OFEI_QueryRegistry_Bytecode,
     },
     geth: {
-        //account:`0x04a733ba681d4d6effd8eeb39ed274b38fcdb0ca`,
+        //account:`0xee860c9a2d17121a09222f69e1dc83a1351b90eb`,
         account:`0xd5088609f4770f4e1eefb28b92ddc1e426a3b8b9`,// edge的帳戶
         //暫時不用
         password: process.env.password,
