@@ -26,6 +26,14 @@ module.exports = async function queryData(data) {
     //     return;
     // }
 
+    let startTime = Date.now();
+    let str = `${data.deviceID},${startTime}\n`
+
+    fs.appendFile(`./logs/${data.deviceID}_${startTime}_OEIstart.csv`, str, function (err) {
+        if (err) throw err;
+        console.log(`${data.deviceID}Log Saved!`);
+    });
+
     return new Promise((resolve, reject) => {
         let result ={};
         Consumer.methods

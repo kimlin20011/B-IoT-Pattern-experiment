@@ -23,16 +23,15 @@ module.exports = async function listenCallbackEvent() {
             let callbackDate = Date.now();
             let str = `${result.identifier},${callbackDate},${result.callbackTimestamp}\n`
             try {
-                fs.appendFile(`./logs/${result.deviceID}_callbackData.csv`, str, function (err) {
+                fs.appendFile(`./logs/${result.deviceID}_${identifier}_callbackData.csv`, str, function (err) {
                     if (err) throw err;
                     console.log(`${result.deviceID}_callbackData_Log Saved!`);
                 });
             } catch (e) {
                 console.log(e);
-                fs.writeFileSync(`./logs/${result.deviceID}_callbackData.csv`, str, (err) => { console.log(err); });
+                fs.writeFileSync(`./logs/${result.deviceID}_${identifier}_callbackData.csv`, str, (err) => { console.log(err); });
             }
             console.log(`成功監聽到Callback Event\n`);
-            //console.log(result);
         })
         .on('error', function (error) {
             let result = {};
