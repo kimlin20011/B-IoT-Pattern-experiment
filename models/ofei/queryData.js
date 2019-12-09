@@ -26,6 +26,13 @@ module.exports = async function queryData(data) {
     //     console.log(`not unlock`);
     //     return;
     // }
+    let startTime = Date.now();
+    let str = `${data.deviceID},${startTime}\n`
+
+    fs.appendFile(`./logs/${data.csvName}_OFI_start.csv`, str, function (err) {
+        if (err) throw err;
+        console.log(`${data.csvName}_OFI_start.csv Log Saved!`);
+    });
 
     return new Promise((resolve, reject) => {
         let result = {};

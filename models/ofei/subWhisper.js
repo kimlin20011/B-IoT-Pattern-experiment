@@ -15,9 +15,9 @@ module.exports =  function subscribe_whisper(data) {
             
     
                 let msg_receive = web3.utils.hexToUtf8(msg.payload);
-                console.log(`whisper訊息${msg_receive}`);
+                //console.log(`whisper訊息${msg_receive}`);
                 let callbackDate = Date.now();
-                let str = `${msg_receive},${callbackDate}\n`
+                let str = `${callbackDate}\n`
                 try {
                     fs.appendFile(`./logs/${csvname}_whisper_callbackData.csv`, str, function (err) {
                         if (err) throw err;
