@@ -26,7 +26,7 @@ module.exports ={
     },
     geth: {
         //account:`0x04a733ba681d4d6effd8eeb39ed274b38fcdb0ca`,
-        account:`0x5f187bda2c1d879596fa6714caf660b0d5ef426c`,// edge的帳戶
+        account:`0xd5088609f4770f4e1eefb28b92ddc1e426a3b8b9`,// edge的帳戶
         //暫時不用
         password: process.env.password,
         gethWebsocketUrl:`ws://localhost:8546`,
