@@ -5,12 +5,13 @@ const pidusage = require('pidusage')
 let logging = false;
 let interval;
 let koa_pid= process.pid;
-let geth_pid= 1646;
-let index = 0;
 
 
-
+//data.gethPID
+//data.csvName
 module.exports = async function getPIDusage(data) {
+    let geth_pid= data.gethPID;
+    let index = 0;
     console.log(`koa_pid:${koa_pid}\ngeth_pid:${geth_pid}`)
     if (!logging) {
         logging = true;
@@ -27,24 +28,27 @@ module.exports = async function getPIDusage(data) {
                 //   elapsed: 6650000,     // ms since the start of the process
                 //   timestamp: 864000000  // ms since epoch
                 // }
-                let timestamp = Date.now();
-                let str = `${index},${stats[`${koa_pid}`].memory},${stats[`${koa_pid}`].cpu},${stats[`${geth_pid}`].memory},${stats[`${geth_pid}`].cpu},${timestamp}\n`
+                console.log(stats)
+                //let timestamp = Date.now();
+                let str = `${index},${stats[`${koa_pid}`].memory},${stats[`${koa_pid}`].cpu},${stats[`${geth_pid}`].memory},${stats[`${geth_pid}`].cpu},${stats[`${koa_pid}`].timestamp}\n`
                 index++;
                 try {
-                    fs.appendFile(`./logs/PIG_usage.csv`, str, function (err) {
+                    fs.appendFile(`./logs/PIG_usage_${data.csvName}.csv`, str, function (err) {
                         if (err) throw err;
                         console.log('PIDusage Log Saved!');
                     });
                 } catch (e) {
                     console.log(e);
-                    fs.writeFileSync(`./logs/PIG_usage.csv`, str, (err) => { console.log(err); });
+                    fs.writeFileSync(`./logs/PIG_usage_${data.csvName}.csv`, str, (err) => { console.log(err); });
                 }
             })
-        }, 1000)
+        }, 500)
+        return `start get pidusage`;
     } else {
         logging = false;
         clearInterval(interval);
         console.log(`Stop logging pidusage!!`);
+        return `stop get pidusage`;
     }
-    return `change get pidusage state`;
+    //return `change get pidusage state`;
 }
