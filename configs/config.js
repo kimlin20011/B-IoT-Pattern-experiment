@@ -9,6 +9,8 @@ const QueryRegistry_Abi = JSON.parse(fs.readFileSync('./migrates/oei_new_sol_Que
 const QueryRegistry_Bytecode = '0x' + fs.readFileSync('./migrates/oei_new_sol_QueryRegistry.bin').toString();
 const OFEI_QueryRegistry_Abi = JSON.parse(fs.readFileSync('./migrates/ofei_sol_QueryRegistry.abi').toString());
 const OFEI_QueryRegistry_Bytecode = '0x' + fs.readFileSync('./migrates/ofei_sol_QueryRegistry.bin').toString();
+const Observer_Abi = JSON.parse(fs.readFileSync('./migrates/odp_sol_Observer.abi').toString());
+const Observer_Bytecode = '0x' + fs.readFileSync('./migrates/odp_sol_Observer.bin').toString();
 
 module.exports ={
     port: 3001,
@@ -19,6 +21,10 @@ module.exports ={
     QueryRegistry: {
         abi: QueryRegistry_Abi,
         bytecode: QueryRegistry_Bytecode,
+    },
+    Observer: {
+        abi: Observer_Abi,
+        bytecode: Observer_Bytecode,
     },
     OFEI_QueryRegistry: {
         abi: OFEI_QueryRegistry_Abi,

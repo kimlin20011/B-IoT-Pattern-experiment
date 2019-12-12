@@ -1,3 +1,4 @@
+//solcjs -o ../migrates --bin --abi odp.sol
 pragma solidity ^0.5.2;
 contract Observer {
 
