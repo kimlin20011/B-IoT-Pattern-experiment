@@ -45,7 +45,7 @@ module.exports = async function deploy_OFEI_QueryRegistry_contract() {
                 result.address = receipt.contractAddress;
                 //將新生成的RM地址寫進.txt檔案
                 fs.writeFileSync('./OFEI_QueryRegistry_Address.txt', result.address);
-                fs.writeFileSync('../Device_B-IoT-Pattern-experiment/OFEI_QueryRegistry_Address.txt', result.address);
+               // fs.writeFileSync('../Device_B-IoT-Pattern-experiment/OFEI_QueryRegistry_Address.txt', result.address);
                 resolve(result);
             })
     });
